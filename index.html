@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Md Asad Uddin Anas — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0B1220;
+    --panel: #131B2E;
+    --panel-2: #0E1626;
+    --line: #24304A;
+    --text: #E7ECF5;
+    --muted: #8B95A7;
+    --accent: #3FBF8F;
+    --accent-2: #E8A33D;
+    --radius: 10px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:
+      radial-gradient(circle at 1px 1px, rgba(255,255,255,0.035) 1px, transparent 1px) 0 0/28px 28px,
+      var(--bg);
+    color:var(--text);
+    font-family:'IBM Plex Sans', sans-serif;
+    line-height:1.6;
+  }
+  a{color:inherit;}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 28px;}
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    letter-spacing:.12em;
+    color:var(--accent);
+    text-transform:uppercase;
+  }
+  h1,h2,h3{font-family:'Space Grotesk', sans-serif; font-weight:600; letter-spacing:-0.01em;}
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(11,18,32,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{display:flex; align-items:center; justify-content:space-between; height:64px;}
+  .brand{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:17px;}
+  .brand span{color:var(--accent);}
+  .navlinks{display:flex; gap:28px; font-size:14px; color:var(--muted);}
+  .navlinks a{text-decoration:none; transition:color .2s;}
+  .navlinks a:hover{color:var(--text);}
+
+  /* ---------- HERO ---------- */
+  header.hero{padding:96px 0 72px; border-bottom:1px solid var(--line);}
+  .hero-grid{display:grid; grid-template-columns:1.1fr 0.9fr; gap:56px; align-items:center;}
+  @media(max-width:860px){ .hero-grid{grid-template-columns:1fr;} }
+
+  .hero h1{font-size:42px; line-height:1.15; margin:14px 0 10px;}
+  .hero .role{font-family:'IBM Plex Mono',monospace; color:var(--accent-2); font-size:15px; margin-bottom:20px;}
+  .hero p.lede{color:var(--muted); font-size:16px; max-width:46ch; margin-bottom:30px;}
+  .cta-row{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:28px;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:12px 20px; border-radius:8px; font-size:14px; font-weight:500;
+    text-decoration:none; border:1px solid transparent; cursor:pointer;
+    transition:transform .15s ease, border-color .15s ease, background .15s ease;
+  }
+  .btn:hover{transform:translateY(-1px);}
+  .btn-primary{background:var(--accent); color:#08140F;}
+  .btn-primary:hover{background:#57d1a4;}
+  .btn-ghost{border-color:var(--line); color:var(--text);}
+  .btn-ghost:hover{border-color:var(--accent);}
+
+  .resume-dropdown{position:relative; display:inline-block;}
+  .caret{font-size:11px; margin-left:2px; transition:transform .15s ease;}
+  .resume-dropdown.open .caret{transform:rotate(180deg);}
+  .resume-menu{
+    position:absolute; top:calc(100% + 8px); left:0; min-width:240px;
+    background:var(--panel); border:1px solid var(--line); border-radius:8px;
+    padding:6px; box-shadow:0 16px 40px -12px rgba(0,0,0,0.6);
+    opacity:0; visibility:hidden; transform:translateY(-6px);
+    transition:opacity .15s ease, transform .15s ease, visibility .15s;
+    z-index:60;
+  }
+  .resume-dropdown.open .resume-menu{opacity:1; visibility:visible; transform:translateY(0);}
+  .resume-menu a{
+    display:block; padding:10px 12px; font-size:13.5px; border-radius:6px;
+    text-decoration:none; color:var(--text);
+  }
+  .resume-menu a:hover{background:var(--panel-2); color:var(--accent);}
+  .social-row{display:flex; gap:16px; font-family:'IBM Plex Mono',monospace; font-size:13px; color:var(--muted);}
+  .social-row a{text-decoration:none; border-bottom:1px solid transparent;}
+  .social-row a:hover{color:var(--accent); border-color:var(--accent);}
+
+  /* --- verification log panel (signature element) --- */
+  .logpanel{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    overflow:hidden;
+    box-shadow:0 20px 60px -20px rgba(0,0,0,0.6);
+  }
+  .logpanel .titlebar{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:10px 16px; border-bottom:1px solid var(--line);
+    font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--muted);
+  }
+  .dot-row{display:flex; gap:6px;}
+  .dot{width:8px; height:8px; border-radius:50%; background:var(--line);}
+  .logpanel .body{
+    padding:18px 18px 22px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12.5px;
+    min-height:230px;
+  }
+  .logline{
+    display:flex; gap:10px; opacity:0; transform:translateY(4px);
+    animation:reveal .4s ease forwards;
+    margin-bottom:9px; color:var(--muted);
+  }
+  .logline b{color:var(--text); font-weight:500;}
+  .logline .tag{color:var(--accent); min-width:78px;}
+  .logline .tag.warn{color:var(--accent-2);}
+  @keyframes reveal{ to{opacity:1; transform:translateY(0);} }
+  .cursor{display:inline-block; width:7px; height:14px; background:var(--accent); vertical-align:middle; animation:blink 1s steps(1) infinite;}
+  @keyframes blink{ 50%{opacity:0;} }
+
+  @media (prefers-reduced-motion: reduce){
+    .logline{animation:none; opacity:1; transform:none;}
+    .cursor{animation:none;}
+  }
+
+  /* ---------- SECTIONS ---------- */
+  section{padding:76px 0; border-bottom:1px solid var(--line);}
+  .section-head{margin-bottom:36px;}
+  .section-head h2{font-size:28px; margin-top:8px;}
+
+  /* About */
+  .about-grid{display:grid; grid-template-columns:1fr 1fr; gap:48px;}
+  @media(max-width:860px){.about-grid{grid-template-columns:1fr;}}
+  .about-grid p{color:var(--muted); margin-bottom:16px;}
+  .timeline{border-left:1px solid var(--line); padding-left:22px; display:flex; flex-direction:column; gap:22px;}
+  .tl-item .when{font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--accent); margin-bottom:4px;}
+  .tl-item .what{font-weight:600; font-size:15px;}
+  .tl-item .where{color:var(--muted); font-size:13.5px;}
+
+  /* Skills */
+  .skills-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px;}
+  @media(max-width:860px){.skills-grid{grid-template-columns:1fr 1fr;}}
+  @media(max-width:560px){.skills-grid{grid-template-columns:1fr;}}
+  .skill-card{background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); padding:20px;}
+  .skill-card .tag{font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--accent-2); margin-bottom:10px; display:block;}
+  .skill-card ul{list-style:none; display:flex; flex-direction:column; gap:6px;}
+  .skill-card li{font-size:13.5px; color:var(--text);}
+  .skill-card li::before{content:"— "; color:var(--muted);}
+
+  /* Projects */
+  .project-card{
+    background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
+    padding:26px; margin-bottom:22px;
+  }
+  .project-top{display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap;}
+  .project-top h3{font-size:19px;}
+  .status{
+    font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.06em;
+    color:var(--accent); border:1px solid var(--accent); border-radius:20px; padding:4px 10px;
+    white-space:nowrap;
+  }
+  .project-card p.desc{color:var(--muted); margin:12px 0 14px; font-size:14.5px;}
+  .project-card ul.points{list-style:none; margin-bottom:16px;}
+  .project-card ul.points li{font-size:14px; color:var(--text); margin-bottom:7px; padding-left:16px; position:relative;}
+  .project-card ul.points li::before{content:"▸"; position:absolute; left:0; color:var(--accent);}
+  .chips{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px;}
+  .chip{
+    font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--muted);
+    border:1px solid var(--line); border-radius:6px; padding:4px 9px;
+  }
+  .project-links{display:flex; gap:16px; font-family:'IBM Plex Mono',monospace; font-size:12.5px;}
+  .project-links a{text-decoration:none; color:var(--accent); border-bottom:1px solid transparent;}
+  .project-links a:hover{border-color:var(--accent);}
+
+  /* Training strip */
+  .training-strip{display:grid; grid-template-columns:repeat(4,1fr); gap:14px;}
+  @media(max-width:860px){.training-strip{grid-template-columns:1fr 1fr;}}
+  @media(max-width:560px){.training-strip{grid-template-columns:1fr;}}
+  .train-card{border:1px solid var(--line); border-radius:var(--radius); padding:16px; background:var(--panel-2);}
+  .train-card .tag{font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--accent); display:block; margin-bottom:6px;}
+  .train-card p{font-size:13px; color:var(--muted);}
+
+  /* Contact / footer */
+  footer{padding:64px 0 48px;}
+  .contact-grid{display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:32px;}
+  .contact-grid h2{font-size:26px; margin-bottom:10px;}
+  .contact-grid p{color:var(--muted); max-width:40ch;}
+  .contact-links{display:flex; flex-direction:column; gap:10px; font-family:'IBM Plex Mono',monospace; font-size:13.5px;}
+  .contact-links a{text-decoration:none; color:var(--text);}
+  .contact-links a:hover{color:var(--accent);}
+  .fineprint{margin-top:56px; color:var(--muted); font-size:12px; font-family:'IBM Plex Mono',monospace;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand">MD ASAD UDDIN ANAS<span>.</span></div>
+    <div class="navlinks">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Portfolio / 2026</div>
+      <h1>Md Asad Uddin Anas</h1>
+      <div class="role">Java Developer · Cybersecurity Enthusiast · Blockchain Developer</div>
+      <p class="lede">I build systems that verify first and trust never — from a Zero Trust security platform with blockchain-backed identity, to hands-on infrastructure work across Windows, VMware, Linux, and Azure.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#projects">View Projects</a>
+        <div class="resume-dropdown" id="resume-dropdown">
+          <button class="btn btn-ghost" id="resume-toggle" aria-expanded="false" aria-haspopup="true">
+            Download Resume <span class="caret">▾</span>
+          </button>
+          <div class="resume-menu" id="resume-menu" role="menu">
+            <a href="Java_CyberSecurity_Hybrid_Resume.pdf" download role="menuitem">Java + Cybersecurity Hybrid</a>
+            <a href="Cyber_Security_Analyst_Resume.pdf" download role="menuitem">Cybersecurity Analyst</a>
+            <a href="Java_Developer_Resume.pdf" download role="menuitem">Java Developer</a>
+            <a href="Windows_VMware_Linux_Azure_Resume.pdf" download role="menuitem">Windows / VMware / Linux / Azure</a>
+          </div>
+        </div>
+      </div>
+      <div class="social-row">
+        <a href="https://github.com/MdAsadUddin-Anas-12" target="_blank">GitHub ↗</a>
+        <a href="https://www.linkedin.com/in/md-asad-uddin-anas-a6a9702b5" target="_blank">LinkedIn ↗</a>
+        <a href="mailto:mdasaduddinanas2@gmail.com">Email ↗</a>
+      </div>
+    </div>
+
+    <div class="logpanel">
+      <div class="titlebar">
+        <span>zero-trust-platform · access.log</span>
+        <div class="dot-row"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+      </div>
+      <div class="body" id="logbody"></div>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap about-grid">
+    <div>
+      <div class="eyebrow">About</div>
+      <h2>Security-first, built from the ground up</h2>
+      <p style="margin-top:18px;">I'm a Computer Science Engineering graduate specializing in Cybersecurity, IoT, and Blockchain Technology. My work centers on one question: how do you design systems that stay secure even when you assume everything else has already failed?</p>
+      <p>That question shaped my flagship project — a Zero Trust Cyber Security Platform combining role-based access control, multi-factor authentication, and blockchain-based identity management in one real-time dashboard. Alongside that, I've built a solid base in Core and Advanced Java, Python, and MySQL, and more recently in Windows Server, VMware, Linux, and Azure infrastructure through structured, hands-on training.</p>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="when">2022 – 2026</div>
+        <div class="what">B.E. Computer Science Engineering</div>
+        <div class="where">Nawab Shah Alam Khan College of Engineering &amp; Technology, Osmania University</div>
+      </div>
+      <div class="tl-item">
+        <div class="when">May – Jul 2025</div>
+        <div class="what">Blockchain Technology Intern</div>
+        <div class="where">Codec Technologies Pvt. Ltd. — AICTE &amp; ICAC approved</div>
+      </div>
+      <div class="tl-item">
+        <div class="when">Apr – Jun 2026</div>
+        <div class="what">Infrastructure Lab Training</div>
+        <div class="where">Windows Server, Active Directory, VMware, Linux, Azure</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Skills</div>
+      <h2>What I work with</h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <span class="tag">// programming</span>
+        <ul><li>Core &amp; Advanced Java (JDBC)</li><li>Python</li><li>HTML / CSS</li><li>SQL / MySQL</li></ul>
+      </div>
+      <div class="skill-card">
+        <span class="tag">// cybersecurity</span>
+        <ul><li>Zero Trust Architecture</li><li>RBAC · IAM · MFA</li><li>Network Security</li><li>Cryptography Basics</li></ul>
+      </div>
+      <div class="skill-card">
+        <span class="tag">// blockchain</span>
+        <ul><li>Solidity</li><li>Ethereum</li><li>Hardhat</li><li>Ethers.js</li></ul>
+      </div>
+      <div class="skill-card">
+        <span class="tag">// systems &amp; cloud</span>
+        <ul><li>Windows Server / AD DS</li><li>VMware (vCenter, ESXi)</li><li>Linux (RHEL7 / RHEL9)</li><li>Microsoft Azure</li></ul>
+      </div>
+      <div class="skill-card">
+        <span class="tag">// tools</span>
+        <ul><li>Docker</li><li>GitHub</li><li>VS Code</li><li>Remix IDE</li></ul>
+      </div>
+      <div class="skill-card">
+        <span class="tag">// currently learning</span>
+        <ul><li>SAP BRIM Convergent Charging</li><li>Advanced Azure networking</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Projects</div>
+      <h2>Selected work</h2>
+    </div>
+
+    <div class="project-card">
+      <div class="project-top">
+        <h3>Zero Trust Cyber Security Platform</h3>
+        <span class="status">ACTIVE · PUBLIC</span>
+      </div>
+      <p class="desc">A full-stack security platform enforcing continuous verification of users and devices — no implicit trust, anywhere in the system.</p>
+      <ul class="points">
+        <li>Multi-factor authentication (MFA) and role-based access control (RBAC) govern identity and resource access.</li>
+        <li>Real-time threat monitoring dashboard visualizes system health and security events via Recharts.</li>
+        <li>Blockchain-based identity management using Solidity smart contracts, Hardhat, and Ethers.js.</li>
+        <li>Containerized with Docker and deployed on Vercel for scalable delivery.</li>
+      </ul>
+      <div class="chips">
+        <span class="chip">React</span><span class="chip">TypeScript</span><span class="chip">Vite</span>
+        <span class="chip">Tailwind CSS</span><span class="chip">Node.js</span><span class="chip">Docker</span>
+        <span class="chip">Hardhat</span><span class="chip">Solidity</span><span class="chip">Ethers.js</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/MdAsadUddin-Anas-12/Zero-Trust-Cyber-Security-Platform-" target="_blank">GitHub Repository ↗</a>
+        <a href="https://zero-trust-cybersecurity-platform-o0g0qyqq0-diigootasks.vercel.app" target="_blank">Live Demo ↗</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-top">
+        <h3>Hacking Competition Smart Contract</h3>
+        <span class="status">PERSONAL PROJECT</span>
+      </div>
+      <p class="desc">An Ethereum smart contract that runs secure, transparent hacking competitions — participants join via ETH transactions with verifiable, tamper-resistant results.</p>
+      <ul class="points">
+        <li>Live hack tracking and an automated winner-selection mechanism using block difficulty and timestamps.</li>
+        <li>Wallet connectivity via MetaMask and blockchain interaction through Ethers.js.</li>
+        <li>Contract deployed and tested through Remix IDE, with a responsive HTML/CSS/JS front end.</li>
+      </ul>
+      <div class="chips">
+        <span class="chip">Solidity</span><span class="chip">Ethereum</span><span class="chip">MetaMask</span>
+        <span class="chip">Remix IDE</span><span class="chip">Ethers.js</span><span class="chip">JavaScript</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Experience &amp; Training</div>
+      <h2>Where I've applied this</h2>
+    </div>
+    <div class="project-card" style="margin-bottom:28px;">
+      <div class="project-top">
+        <h3>Blockchain Technology Intern — Codec Technologies Pvt. Ltd.</h3>
+        <span class="status">MAY – JUL 2025</span>
+      </div>
+      <p class="desc">Two-month, AICTE &amp; ICAC approved internship in blockchain application development, hybrid, India.</p>
+      <ul class="points">
+        <li>Built working knowledge of blockchain architecture, transaction flow, and decentralized system design through project-based learning.</li>
+        <li>Collaborated on technical assignments under industry mentorship, strengthening documentation and problem-solving practices.</li>
+      </ul>
+    </div>
+
+    <div class="eyebrow" style="margin-bottom:14px;">Hands-on infrastructure training (Apr – Jun 2026)</div>
+    <div class="training-strip">
+      <div class="train-card"><span class="tag">Windows Server</span><p>AD DC, FSMO roles, Group Policy, DHCP, File Server / iSCSI, PowerShell</p></div>
+      <div class="train-card"><span class="tag">VMware</span><p>vCenter, ESXi, vMotion, Storage vMotion</p></div>
+      <div class="train-card"><span class="tag">Linux</span><p>RHEL7 / RHEL9, YUM, nmcli, CLI administration</p></div>
+      <div class="train-card"><span class="tag">Azure</span><p>VMs, VNet peering, Load Balancer, NSG, Firewall, VMSS</p></div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div>
+        <div class="eyebrow">Contact</div>
+        <h2>Let's build something secure.</h2>
+        <p>Open to roles in software engineering, cybersecurity, and IT infrastructure. Based in Hyderabad, India.</p>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:mdasaduddinanas2@gmail.com">mdasaduddinanas2@gmail.com</a>
+        <a href="tel:+919398789281">+91 93987 89281</a>
+        <a href="https://github.com/MdAsadUddin-Anas-12" target="_blank">github.com/MdAsadUddin-Anas-12</a>
+        <a href="https://www.linkedin.com/in/md-asad-uddin-anas-a6a9702b5" target="_blank">linkedin.com/in/md-asad-uddin-anas-a6a9702b5</a>
+      </div>
+    </div>
+    <div class="fineprint">© 2026 Md Asad Uddin Anas. Built with plain HTML/CSS/JS — no framework required.</div>
+  </div>
+</footer>
+
+<script>
+  // Signature hero element: a scripted "access log" reveal echoing
+  // the real-time monitoring dashboard built in the Zero Trust project.
+  const lines = [
+    { tag: '[SYSTEM]', text: 'Initializing session…' },
+    { tag: '[AUTH]', text: 'Identity verified — <b>Md Asad Uddin Anas</b>' },
+    { tag: '[ROLE]', text: 'engineer · cybersecurity · blockchain' },
+    { tag: '[RBAC]', text: 'Access granted → portfolio.view()' },
+    { tag: '[SKILLS]', text: 'Java · Python · Solidity · MySQL' },
+    { tag: '[TRAINING]', warn: true, text: 'Windows Server · VMware · Linux · Azure' },
+    { tag: '[PROJECT]', text: 'zero-trust-platform → status: active' },
+    { tag: '[STATUS]', text: 'Ready to build.' },
+  ];
+
+  const body = document.getElementById('logbody');
+  let delay = 0;
+  lines.forEach((l, i) => {
+    const el = document.createElement('div');
+    el.className = 'logline';
+    el.style.animationDelay = delay + 'ms';
+    el.innerHTML = `<span class="tag${l.warn ? ' warn' : ''}">${l.tag}</span><span>${l.text}</span>`;
+    body.appendChild(el);
+    delay += 260;
+  });
+  const cursorLine = document.createElement('div');
+  cursorLine.className = 'logline';
+  cursorLine.style.animationDelay = delay + 'ms';
+  cursorLine.innerHTML = '<span class="cursor"></span>';
+  body.appendChild(cursorLine);
+
+  // Resume dropdown toggle
+  const dropdown = document.getElementById('resume-dropdown');
+  const toggle = document.getElementById('resume-toggle');
+  toggle.addEventListener('click', function(e){
+    e.stopPropagation();
+    const isOpen = dropdown.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', isOpen);
+  });
+  document.addEventListener('click', function(){
+    dropdown.classList.remove('open');
+    toggle.setAttribute('aria-expanded', 'false');
+  });
+</script>
+
+</body>
+</html>
