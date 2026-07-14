@@ -1,0 +1,32 @@
+{
+  "name": "Md Asad Uddin Anas — Portfolio",
+  "short_name": "Asad Anas",
+  "description": "Windows Administrator, VMware Administrator, Software Engineer and Cybersecurity Enthusiast — Hyderabad, India.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#070915",
+  "theme_color": "#070915",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "icons/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
