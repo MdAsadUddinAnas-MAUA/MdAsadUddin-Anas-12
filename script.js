@@ -113,7 +113,6 @@
   });
 
   var revealEls = document.querySelectorAll('.reveal');
-  var skillBars = document.querySelectorAll('.bar-fill');
 
   var io = new IntersectionObserver(function(entries){
     entries.forEach(function(entry){
@@ -121,17 +120,6 @@
     });
   }, { threshold:0.15, rootMargin:'0px 0px -60px 0px' });
   revealEls.forEach(function(el){ io.observe(el); });
-
-  var barIo = new IntersectionObserver(function(entries){
-    entries.forEach(function(entry){
-      if(entry.isIntersecting){
-        var el = entry.target;
-        el.style.width = el.getAttribute('data-w') + '%';
-        barIo.unobserve(el);
-      }
-    });
-  }, { threshold:0.4 });
-  skillBars.forEach(function(el){ barIo.observe(el); });
 
   var resumeDropdown = document.getElementById('resume-dropdown');
   var resumeToggle = document.getElementById('resume-toggle');
