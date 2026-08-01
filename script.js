@@ -44,7 +44,11 @@
 
   /* ---------- Service worker registration (network-first, no aggressive caching) ---------- */
   if('serviceWorker' in navigator){
-    window.addEventListener('load', function(){
+    /* ---------- Auto-update footer copyright year ---------- */
+  var yearEl = document.getElementById('copyright-year');
+  if(yearEl){ yearEl.textContent = new Date().getFullYear(); }
+
+  window.addEventListener('load', function(){
       navigator.serviceWorker.register('service-worker.js').catch(function(){ /* fails silently, site still works */ });
     });
   }
@@ -120,6 +124,30 @@
     });
   }, { threshold:0.15, rootMargin:'0px 0px -60px 0px' });
   revealEls.forEach(function(el){ io.observe(el); });
+
+  /* ---------- Scroll-active nav highlight ---------- */
+  var navLinks = document.querySelectorAll('.navlinks a');
+  var sections = [];
+  navLinks.forEach(function(link){
+    var id = link.getAttribute('href');
+    if(id && id.charAt(0) === '#'){
+      var sec = document.querySelector(id);
+      if(sec) sections.push({ link: link, el: sec });
+    }
+  });
+  if(sections.length){
+    var navSpy = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        var match = sections.find(function(s){ return s.el === entry.target; });
+        if(!match) return;
+        if(entry.isIntersecting){
+          navLinks.forEach(function(l){ l.classList.remove('active'); });
+          match.link.classList.add('active');
+        }
+      });
+    }, { rootMargin:'-40% 0px -55% 0px', threshold:0 });
+    sections.forEach(function(s){ navSpy.observe(s.el); });
+  }
 
   var resumeDropdown = document.getElementById('resume-dropdown');
   var resumeToggle = document.getElementById('resume-toggle');
@@ -245,7 +273,7 @@
     var payload = {
       from_name: nameEl.value.trim(),
       reply_to: emailEl.value.trim(),
-      subject: subjectEl.value.trim() || 'New message from portfolio',
+      subject: subjectEl.value.trim() || 'New Message from Portfolio',
       message: messageEl.value.trim(),
       to_email: CONTACT_EMAIL
     };
