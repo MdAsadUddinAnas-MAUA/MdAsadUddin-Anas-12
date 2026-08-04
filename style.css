@@ -211,7 +211,9 @@ html[data-theme="light"] .moon{ display:none; }
   position:absolute; bottom:36px; left:50%; transform:translateX(-50%); z-index:2;
   display:flex; flex-direction:column; align-items:center; gap:8px; color:var(--muted-2);
   font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.1em;
+  pointer-events:none;
 }
+@media(max-height:760px){ .scroll-cue{ display:none; } }
 .scroll-cue .line{ width:1px; height:34px; background:linear-gradient(var(--accent), transparent); animation:scrollLine 1.8s ease-in-out infinite; }
 @keyframes scrollLine{ 0%{ transform:scaleY(0); transform-origin:top; } 50%{ transform:scaleY(1); transform-origin:top; } 51%{ transform-origin:bottom; } 100%{ transform:scaleY(0); transform-origin:bottom; } }
 @media(max-width:640px){ .scroll-cue{ display:none; } }
